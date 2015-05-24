@@ -1,4 +1,7 @@
+/vendor/
 /bootstrap/compiled.php
 .env.*.php
 .env.php
 .env
+.lock
+.phar
