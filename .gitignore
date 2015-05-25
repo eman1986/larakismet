@@ -4,5 +4,5 @@
 .env.*.php
 .env.php
 .env
-.lock
+*.lock
 .phar

@@ -1,0 +1,24 @@
+{
+  "name": "eman1986/larakismet",
+  "description": "Akismet Client for Laravel 5",
+  "keywords": ["laravel", "akismet", "spam"],
+  "homepage": "http://emandevelopmentdesign.com",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ed Lomonaco",
+      "email": "maggot05@gmail.com",
+      "role": "developer"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.4.0",
+    "illuminate/support": "5.0.*",
+    "nategood/httpful": "~0.2"
+  },
+  "autoload": {
+    "psr-4": { "larakismet\\": "src/" }
+  }
+}
