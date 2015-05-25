@@ -1,6 +1,17 @@
 <?php
+/**
+ * Larakismet
+ *
+ * Akismet Client for Laravel 5.
+ *
+ * Ed Lomonaco
+ * https://github.com/eman1986/larakismet
+ * MIT License
+ */
+
 namespace larakismet;
 
+use Httpful\Mime;
 use Httpful\Request;
 
 class Akismet {
@@ -144,7 +155,7 @@ class Akismet {
                 ->body(http_build_query($data), Mime::FORM)
                 ->send();
 
-            return $response->body == 'valid';
+            return $response == 'valid';
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -179,7 +190,7 @@ class Akismet {
                 ->body(http_build_query($data), Mime::FORM)
                 ->send();
 
-            return $response->body == 'true';
+            return ((bool)$response == false);
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -208,7 +219,7 @@ class Akismet {
                 ->body(http_build_query($data), Mime::FORM)
                 ->send();
 
-            return $response->body;
+            return $response;
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -237,7 +248,7 @@ class Akismet {
                 ->body(http_build_query($data), Mime::FORM)
                 ->send();
 
-            return $response->body;
+            return $response;
         } catch (Exception $e) {
             echo $e->getMessage();
         }

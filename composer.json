@@ -19,6 +19,6 @@
     "nategood/httpful": "~0.2"
   },
   "autoload": {
-    "psr-4": { "larakismet\\": "src/" }
+    "psr-4": { "larakismet\\": "src/larakismet/" }
   }
 }
