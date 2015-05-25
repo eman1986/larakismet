@@ -33,11 +33,11 @@ Akismet likes to have as much information as possible to properly determine if s
 
  If you were to read the Akismet API on this, they ask for a lot of things but at a minimal you'll need the following set:
 
-    larakismet->setCommentAuthor('John Doe');
-    larakismet->setCommentAuthorEmail('email@example.com');
-    larakismet->setPermalink('http://somesite.com/blog/sample-entry');
-    larakismet->setCommentContent('Some content from form.');
-    larakismet->checkSpam();
+    $this->app->larakismet->setCommentAuthor('John Doe');
+    $this->app->larakismet->setCommentAuthorEmail('email@example.com');
+    $this->app->larakismet->setPermalink('http://somesite.com/blog/sample-entry');
+    $this->app->larakismet->setCommentContent('Some content from form.');
+    $this->app->larakismet->checkSpam();
 
 If you check out the source code you can see the other options available to zero in on the spammer, the Akismet API Guide is also a good reference..
 
@@ -45,21 +45,22 @@ If you check out the source code you can see the other options available to zero
 
 You can help Akismet tackle spam by reporting it to them, this requires a smaller set of dat compared to the checkSpam() method.
 
-    larakismet->setCommentAuthor('John Doe');
-    larakismet->setCommentAuthorEmail('email@example.com');
-    larakismet->setPermalink('http://somesite.com/blog/sample-entry');
-    larakismet->setCommentContent('Some content from form.');
-    larakismet->reportSpam();
+    $this->app->larakismet->setCommentAuthor('John Doe');
+    $this->app->larakismet->setCommentAuthorEmail('email@example.com');
+    $this->app->larakismet->setPermalink('http://somesite.com/blog/sample-entry');
+    $this->app->larakismet->setCommentContent('Some content from form.');
+    $this->app->larakismet->reportSpam();
 
 ##reportHam()
 
 You can also report false positives to Akismet by doing the following:
 
-    larakismet->setCommentAuthor('John Doe');
-    larakismet->setCommentAuthorEmail('email@example.com');
-    larakismet->setPermalink('http://somesite.com/blog/sample-entry');
-    larakismet->setCommentContent('Some content from form.');
-    larakismet->reportHam();
+    $api = new \larakismet\Akismet($config);
+    $this->app->larakismet->setCommentAuthor('John Doe');
+    $this->app->larakismet->setCommentAuthorEmail('email@example.com');
+    $this->app->larakismet->setPermalink('http://somesite.com/blog/sample-entry');
+    $this->app->larakismet->setCommentContent('Some content from form.');
+    $this->app->larakismet->reportHam();
     
 ReportSpam() & reportHam() will accept the same parameters. Using these two methods will help make the web a better place for all of us.
 
