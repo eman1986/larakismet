@@ -1,5 +1,15 @@
 <?php
-namespace larakismet;
+/**
+ * Larakismet
+ *
+ * Akismet Client for Laravel 5.
+ *
+ * Ed Lomonaco
+ * https://github.com/eman1986/larakismet
+ * MIT License
+ */
+
+namespace larakismet\ServiceProviders;
 
 use Illuminate\Support\ServiceProvider;
 
