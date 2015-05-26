@@ -41,9 +41,11 @@ class AkismetServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app->singleton('larakismet', function($app)
+        $this->app['akismet']->share(function($app)
         {
             return new Akismet($app['config']['akismet']);
         });
+
+        $this->app->alias('akismet', 'larakismet\Akismet');
     }
 }
