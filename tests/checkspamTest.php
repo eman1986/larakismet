@@ -9,9 +9,9 @@ $testContent = 'Enter in test content here';
 
 $api = new \larakismet\Akismet($config);
 
-$api->setCommentAuthor('John');
-$api->setCommentAuthorEmail('john@example.com');
-$api->setCommentContent($testContent);
-$isSpam = $api->checkSpam() ? 'yes' :'no';
+$api::setCommentAuthor('John');
+$api::setCommentAuthorEmail('john@example.com');
+$api::setCommentContent($testContent);
+$isSpam = $api::checkSpam() ? 'yes' :'no';
 
 echo "Is this Spam? ".$isSpam."\n";

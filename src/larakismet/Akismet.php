@@ -16,21 +16,21 @@ use Httpful\Request;
 
 class Akismet {
 
-    private $_apiUrl = 'rest.akismet.com';
-    private $_apiKey;
-    private $_blog;
-    private $_permalink;
-    private $_commentType;
-    private $_commentAuthor;
-    private $_commentAuthorEmail;
-    private $_commentAuthorUrl;
-    private $_commentContent;
-    private $_commentDate;
-    private $_commentPostModified;
-    private $_language = array('en');
-    private $_charset = 'UTF-8';
-    private $_userRole;
-    private $_isTest;
+    private static $_apiUrl = 'rest.akismet.com';
+    private static $_apiKey;
+    private static $_blog;
+    private static $_permalink;
+    private static $_commentType;
+    private static $_commentAuthor;
+    private static $_commentAuthorEmail;
+    private static $_commentAuthorUrl;
+    private static $_commentContent;
+    private static $_commentDate;
+    private static $_commentPostModified;
+    private static $_language = array('en');
+    private static $_charset = 'UTF-8';
+    private static $_userRole;
+    private static $_isTest;
 
 
     public function __construct($config) {
@@ -38,7 +38,7 @@ class Akismet {
         $this->_blog = $config['akismet_blog_url'];
         $this->_isTest = $config['debug_mode'];
         //check to see if the key is valid.
-        if (!$this->ValidateKey()) {
+        if (!self::ValidateKey()) {
             throw new \Exception('Akismet API Key is invalid. You can obtain a valid one from https://akismet.com');
         }
     }
@@ -51,88 +51,88 @@ class Akismet {
      * Set Permalink
      * @param string $perm
      */
-    public function setPermalink($perm) {
-        $this->_permalink = $perm;
+    public static function setPermalink($perm) {
+        self::$_permalink = $perm;
     }
 
     /**
      * Set Comment Type
      * @param string $type
      */
-    public function setCommentType($type) {
-        $this->_commentType = $type;
+    public static function setCommentType($type) {
+        self::$_commentType = $type;
     }
 
     /**
      * Set Comment Author
      * @param string $author
      */
-    public function setCommentAuthor($author) {
-        $this->_commentAuthor = $author;
+    public static function setCommentAuthor($author) {
+        self::$_commentAuthor = $author;
     }
 
     /**
      * Set Comment Author Email
      * @param string $email
      */
-    public function setCommentAuthorEmail($email) {
-        $this->_commentAuthorEmail = $email;
+    public static function setCommentAuthorEmail($email) {
+        self::$_commentAuthorEmail = $email;
     }
 
     /**
      * Set Comment Author Url
      * @param string $url
      */
-    public function setCommentAuthorUrl($url) {
-        $this->_commentAuthorUrl = $url;
+    public static function setCommentAuthorUrl($url) {
+        self::$_commentAuthorUrl = $url;
     }
 
     /**
      * Set Comment Content
      * @param string $content
      */
-    public function setCommentContent($content) {
-        $this->_commentContent = $content;
+    public static function setCommentContent($content) {
+        self::$_commentContent = $content;
     }
 
     /**
      * Set Comment Date
      * @param DateTime $date
      */
-    public function setCommentDate($date) {
-        $this->_commentDate = $date;
+    public static function setCommentDate($date) {
+        self::$_commentDate = $date;
     }
 
     /**
      * Set Comment Post Modified
      * @param DateTime $date
      */
-    public function setCommentPostModified($date) {
-        $this->_commentPostModified = $date;
+    public static function setCommentPostModified($date) {
+        self::$_commentPostModified = $date;
     }
 
     /**
      * Set Blog Language(s)
      * @param array $lang
      */
-    public function setLanguage($lang) {
-        $this->_language = $lang;
+    public static function setLanguage($lang) {
+        self::$_language = $lang;
     }
 
     /**
      * Set Charset
      * @param string $charset
      */
-    public function setCharset($charset) {
-        $this->_charset = $charset;
+    public static function setCharset($charset) {
+        self::$_charset = $charset;
     }
 
     /**
      * Set User Role
      * @param string $role
      */
-    public function setUserRole($role) {
-        $this->_userRole = $role;
+    public static function setUserRole($role) {
+        self::$_userRole = $role;
     }
 
     /**
@@ -145,13 +145,13 @@ class Akismet {
      * @throws \Exception
      * @throws \Httpful\Exception\ConnectionErrorException
      */
-    private function validateKey() {
+    private static function validateKey() {
         try {
             $data = [
-                "key" => $this->_apiKey,
-                'blog' => urlencode($this->_blog)
+                "key" => self::$_apiKey,
+                'blog' => urlencode(self::$_blog)
             ];
-            $response = Request::post($this->_apiUrl . '/1.1/verify-key')
+            $response = Request::post(self::$_apiUrl . '/1.1/verify-key')
                 ->body(http_build_query($data), Mime::FORM)
                 ->send();
 
@@ -166,27 +166,27 @@ class Akismet {
      * @return bool
      * @throws \Httpful\Exception\ConnectionErrorException
      */
-    public function checkSpam() {
+    public static function checkSpam() {
         try {
             $data = [
-                'blog' => urlencode($this->_blog),
+                'blog' => urlencode(self::$_blog),
                 'user_ip' => $_SERVER['REMOTE_ADDR'],
                 'user_agent' => $_SERVER['HTTP_USER_AGENT'],
                 'referrer' => $_SERVER['HTTP_REFERER'],
-                'permalink' => $this->_permalink,
-                'comment_type' => $this->_commentType,
-                'comment_author' => $this->_commentAuthor,
-                'comment_author_email' => $this->_commentAuthorEmail,
-                'comment_author_url' => $this->_commentAuthorUrl,
-                'comment_content' => $this->_commentContent,
-                'comment_date_gmt' => $this->_commentDate,
-                'comment_post_modified_gmt' => $this->_commentPostModified,
-                'blog_lang' => $this->_language,
-                'blog_charset' => $this->_charset,
-                'user_role' => $this->_userRole,
-                'is_test' => $this->_isTest
+                'permalink' => self::$_permalink,
+                'comment_type' => self::$_commentType,
+                'comment_author' => self::$_commentAuthor,
+                'comment_author_email' => self::$_commentAuthorEmail,
+                'comment_author_url' => self::$_commentAuthorUrl,
+                'comment_content' => self::$_commentContent,
+                'comment_date_gmt' => self::$_commentDate,
+                'comment_post_modified_gmt' => self::$_commentPostModified,
+                'blog_lang' => self::$_language,
+                'blog_charset' => self::$_charset,
+                'user_role' => self::$_userRole,
+                'is_test' => self::$_isTest
             ];
-            $response = Request::post(sprintf('%s.%s/1.1/comment-check', $this->_apiKey, $this->_apiUrl))
+            $response = Request::post(sprintf('%s.%s/1.1/comment-check', self::$_apiKey, self::$_apiUrl))
                 ->body(http_build_query($data), Mime::FORM)
                 ->send();
 
@@ -201,21 +201,21 @@ class Akismet {
      * @return mixed
      * @throws \Httpful\Exception\ConnectionErrorException
      */
-    public function reportSpam() {
+    public static function reportSpam() {
         try {
             $data = [
-                'blog' => urlencode($this->_blog),
+                'blog' => urlencode(self::$_blog),
                 'user_ip' => $_SERVER['REMOTE_ADDR'],
                 'user_agent' => $_SERVER['HTTP_USER_AGENT'],
                 'referrer' => $_SERVER['HTTP_REFERER'],
-                'permalink' => $this->_permalink,
-                'comment_type' => $this->_commentType,
-                'comment_author' => $this->_commentAuthor,
-                'comment_author_email' => $this->_commentAuthorEmail,
-                'comment_author_url' => $this->_commentAuthorUrl,
-                'comment_content' => $this->_commentContent
+                'permalink' => self::$_permalink,
+                'comment_type' => self::$_commentType,
+                'comment_author' => self::$_commentAuthor,
+                'comment_author_email' => self::$_commentAuthorEmail,
+                'comment_author_url' => self::$_commentAuthorUrl,
+                'comment_content' => self::$_commentContent
             ];
-            $response = Request::post(sprintf('%s.%s/1.1/submit-spam', $this->_apiKey, $this->_apiUrl))
+            $response = Request::post(sprintf('%s.%s/1.1/submit-spam', self::$_apiKey, self::$_apiUrl))
                 ->body(http_build_query($data), Mime::FORM)
                 ->send();
 
@@ -230,21 +230,21 @@ class Akismet {
      * @return mixed
      * @throws \Httpful\Exception\ConnectionErrorException
      */
-    public function reportHam() {
+    public static function reportHam() {
         try {
             $data = [
-                'blog' => urlencode($this->_blog),
+                'blog' => urlencode(self::$_blog),
                 'user_ip' => $_SERVER['REMOTE_ADDR'],
                 'user_agent' => $_SERVER['HTTP_USER_AGENT'],
                 'referrer' => $_SERVER['HTTP_REFERER'],
-                'permalink' => $this->_permalink,
-                'comment_type' => $this->_commentType,
-                'comment_author' => $this->_commentAuthor,
-                'comment_author_email' => $this->_commentAuthorEmail,
-                'comment_author_url' => $this->_commentAuthorUrl,
-                'comment_content' => $this->_commentContent
+                'permalink' => self::$_permalink,
+                'comment_type' => self::$_commentType,
+                'comment_author' => self::$_commentAuthor,
+                'comment_author_email' => self::$_commentAuthorEmail,
+                'comment_author_url' => self::$_commentAuthorUrl,
+                'comment_content' => self::$_commentContent
             ];
-            $response = Request::post(sprintf('%s.%s/1.1/submit-ham', $this->_apiKey, $this->_apiUrl))
+            $response = Request::post(sprintf('%s.%s/1.1/submit-ham', self::$_apiKey, self::$_apiUrl))
                 ->body(http_build_query($data), Mime::FORM)
                 ->send();
 
