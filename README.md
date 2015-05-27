@@ -37,6 +37,8 @@ Akismet likes to have as much information as possible to properly determine if s
 
  If you were to read the Akismet API on this, they ask for a lot of things but at a minimal you'll need the following set:
 
+    use \larakismet\Akismet;
+
     Akismet::setCommentAuthor('John Doe');
     Akismet::setCommentAuthorEmail('email@example.com');
     Akismet::setPermalink('http://somesite.com/blog/sample-entry');
@@ -49,6 +51,8 @@ If you check out the source code you can see the other options available to zero
 
 You can help Akismet tackle spam by reporting it to them, this requires a smaller set of dat compared to the checkSpam() method.
 
+    use \larakismet\Akismet;
+
     Akismet::setCommentAuthor('John Doe');
     Akismet::setCommentAuthorEmail('email@example.com');
     Akismet::setPermalink('http://somesite.com/blog/sample-entry');
@@ -59,6 +63,8 @@ You can help Akismet tackle spam by reporting it to them, this requires a smalle
 
 You can also report false positives to Akismet by doing the following:
 
+    use \larakismet\Akismet;
+    
     Akismet::setCommentAuthor('John Doe');
     Akismet::setCommentAuthorEmail('email@example.com');
     Akismet::setPermalink('http://somesite.com/blog/sample-entry');
