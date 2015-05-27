@@ -41,11 +41,19 @@ class AkismetServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app->bind('Akismet', function($app)
+        $this->app->bindShared('Akismet', function($app)
         {
             return new Akismet($app['config']['akismet']);
         });
+    }
 
-        $this->app->alias('Akismet', 'larakismet\Akismet');
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['Akismet'];
     }
 }

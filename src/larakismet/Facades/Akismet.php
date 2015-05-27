@@ -22,6 +22,6 @@ class Akismet extends Facade {
      */
     protected static function getFacadeAccessor()
     {
-        return 'akismet';
+        return 'Akismet';
     }
 }

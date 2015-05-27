@@ -19,7 +19,6 @@ class Akismet {
     private static $_apiUrl = 'rest.akismet.com';
     private static $_apiKey;
     private static $_blog;
-    private static $_permalink;
     private static $_commentType;
     private static $_commentAuthor;
     private static $_commentAuthorEmail;
@@ -34,9 +33,9 @@ class Akismet {
 
 
     public function __construct($config) {
-        $this->_apiKey = $config['akismet_api_key'];
-        $this->_blog = $config['akismet_blog_url'];
-        $this->_isTest = $config['debug_mode'];
+        $this->$_apiKey = $config['akismet_api_key'];
+        $this->$_blog = $config['akismet_blog_url'];
+        $this->$_isTest = $config['debug_mode'];
         //check to see if the key is valid.
         if (!self::ValidateKey()) {
             throw new \Exception('Akismet API Key is invalid. You can obtain a valid one from https://akismet.com');
@@ -46,14 +45,6 @@ class Akismet {
     /**
      * PROPERTIES
      */
-
-    /**
-     * Set Permalink
-     * @param string $perm
-     */
-    public static function setPermalink($perm) {
-        self::$_permalink = $perm;
-    }
 
     /**
      * Set Comment Type
@@ -170,10 +161,10 @@ class Akismet {
         try {
             $data = [
                 'blog' => urlencode(self::$_blog),
-                'user_ip' => $_SERVER['REMOTE_ADDR'],
-                'user_agent' => $_SERVER['HTTP_USER_AGENT'],
-                'referrer' => $_SERVER['HTTP_REFERER'],
-                'permalink' => self::$_permalink,
+                'user_ip' => class_exists('\Illuminate\Support\Facades\Request') ? \Request::getClientIp() : $_SERVER['REMOTE_ADDR'],
+                'user_agent' => class_exists('\Illuminate\Support\Facades\Request') ? \Request::server('HTTP_USER_AGENT') : $_SERVER['HTTP_USER_AGENT'],
+                'referrer' => class_exists('\Illuminate\Support\Facades\URL') ? \URL::previous() : $_SERVER['HTTP_REFERER'],
+                'permalink' => class_exists('\Illuminate\Support\Facades\Request') ? \Request::url() : $_SERVER['REQUEST_URI'],
                 'comment_type' => self::$_commentType,
                 'comment_author' => self::$_commentAuthor,
                 'comment_author_email' => self::$_commentAuthorEmail,
@@ -205,10 +196,10 @@ class Akismet {
         try {
             $data = [
                 'blog' => urlencode(self::$_blog),
-                'user_ip' => $_SERVER['REMOTE_ADDR'],
-                'user_agent' => $_SERVER['HTTP_USER_AGENT'],
-                'referrer' => $_SERVER['HTTP_REFERER'],
-                'permalink' => self::$_permalink,
+                'user_ip' => class_exists('\Illuminate\Support\Facades\Request') ? \Request::getClientIp() : $_SERVER['REMOTE_ADDR'],
+                'user_agent' => class_exists('\Illuminate\Support\Facades\Request') ? \Request::server('HTTP_USER_AGENT') : $_SERVER['HTTP_USER_AGENT'],
+                'referrer' => class_exists('\Illuminate\Support\Facades\URL') ? \URL::previous() : $_SERVER['HTTP_REFERER'],
+                'permalink' => class_exists('\Illuminate\Support\Facades\Request') ? \Request::url() : $_SERVER['REQUEST_URI'],
                 'comment_type' => self::$_commentType,
                 'comment_author' => self::$_commentAuthor,
                 'comment_author_email' => self::$_commentAuthorEmail,
@@ -234,10 +225,10 @@ class Akismet {
         try {
             $data = [
                 'blog' => urlencode(self::$_blog),
-                'user_ip' => $_SERVER['REMOTE_ADDR'],
-                'user_agent' => $_SERVER['HTTP_USER_AGENT'],
-                'referrer' => $_SERVER['HTTP_REFERER'],
-                'permalink' => self::$_permalink,
+                'user_ip' => class_exists('\Illuminate\Support\Facades\Request') ? \Request::getClientIp() : $_SERVER['REMOTE_ADDR'],
+                'user_agent' => class_exists('\Illuminate\Support\Facades\Request') ? \Request::server('HTTP_USER_AGENT') : $_SERVER['HTTP_USER_AGENT'],
+                'referrer' => class_exists('\Illuminate\Support\Facades\URL') ? \URL::previous() : $_SERVER['HTTP_REFERER'],
+                'permalink' => class_exists('\Illuminate\Support\Facades\Request') ? \Request::url() : $_SERVER['REQUEST_URI'],
                 'comment_type' => self::$_commentType,
                 'comment_author' => self::$_commentAuthor,
                 'comment_author_email' => self::$_commentAuthorEmail,
