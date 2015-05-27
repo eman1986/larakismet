@@ -11,6 +11,8 @@
 
 namespace larakismet\ServiceProviders;
 
+use larakismet;
+
 use Illuminate\Support\ServiceProvider;
 
 class AkismetServiceProvider extends ServiceProvider {
