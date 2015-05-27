@@ -1,5 +1,10 @@
 # Larakismet
 
+[![Total Downloads](https://poser.pugx.org/eman1986/larakismet/d/total.svg)](https://packagist.org/packages/eman1986/larakismet)
+[![Latest Stable Version](https://poser.pugx.org/eman1986/larakismet/v/stable.svg)](https://packagist.org/packages/eman1986/larakismet)
+[![Latest Unstable Version](https://poser.pugx.org/eman1986/larakismet/v/unstable.svg)](https://packagist.org/packages/eman1986/larakismet)
+[![License](https://poser.pugx.org/eman1986/larakismet/license.svg)](https://packagist.org/packages/eman1986/larakismet)
+
 Akismet Client for Laravel 5.
 
 #Installation
