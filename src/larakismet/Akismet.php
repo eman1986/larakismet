@@ -176,7 +176,7 @@ class Akismet {
                 'user_role' => $this->_userRole,
                 'is_test' => $this->_isTest
             ];
-            $response = Request::post(sprintf('%s.%s/1.1/comment-check',$this->_apiUrl,$this->_apiKey))
+            $response = Request::post(sprintf('%s.%s/1.1/comment-check',$this->_apiKey, $this->_apiUrl))
                 ->body(http_build_query($data), Mime::FORM)
                 ->send();
 
@@ -205,7 +205,7 @@ class Akismet {
                 'comment_author_url' => $this->_commentAuthorUrl,
                 'comment_content' => $this->_commentContent
             ];
-            $response = Request::post(sprintf('%s.%s/1.1/submit-spam',$this->_apiUrl,$this->_apiKey))
+            $response = Request::post(sprintf('%s.%s/1.1/submit-spam',$this->_apiKey, $this->_apiUrl))
                 ->body(http_build_query($data), Mime::FORM)
                 ->send();
 
@@ -234,7 +234,7 @@ class Akismet {
                 'comment_author_url' => $this->_commentAuthorUrl,
                 'comment_content' => $this->_commentContent
             ];
-            $response = Request::post(sprintf('%s.%s/1.1/submit-ham',$this->_apiUrl,$this->_apiKey))
+            $response = Request::post(sprintf('%s.%s/1.1/submit-ham',$this->_apiKey, $this->_apiUrl))
                 ->body(http_build_query($data), Mime::FORM)
                 ->send();
 
