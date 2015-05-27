@@ -54,6 +54,6 @@ class AkismetServiceProvider extends ServiceProvider {
      */
     public function provides()
     {
-        return ['Akismet'];
+        return ['larakismet\Akismet'];
     }
 }
